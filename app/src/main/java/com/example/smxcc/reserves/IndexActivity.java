@@ -1,8 +1,6 @@
 package com.example.smxcc.reserves;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -28,7 +26,6 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
 
 public class IndexActivity extends AppCompatActivity {
     TextView textViewBenvinguda;
@@ -48,23 +45,23 @@ public class IndexActivity extends AppCompatActivity {
 
 
     String url;
-    String urlLogin;
+    String serveiWeb;
 
     RequestQueue queue;
 
     @Override
     protected void onResume(){
-        Log.i("CREATE","resume");
-        carregarReserves("admin",linearLayoutPendents,linearLayoutCurs,linearLayourFinalitzades);
+        carregarReserves(usuari,linearLayoutPendents,linearLayoutCurs,linearLayourFinalitzades);
         super.onResume();
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
 
         url = this.getString(R.string.ip);
-        String urlLogin = url+"app_reserves.php";
+        serveiWeb = url+"app_reserves.php";
 
         queue = Volley.newRequestQueue(this);
 
@@ -139,7 +136,7 @@ public class IndexActivity extends AppCompatActivity {
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
-                urlLogin+"?usuari="+usuari,
+                serveiWeb +"?usuari="+usuari,
                 null,
                 new Response.Listener<JSONArray>() {
                     @Override

@@ -26,7 +26,10 @@
             android:id="@+id/constraintLayoutReserves"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            tools:layout_editor_absoluteY="777dp">
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewHoraInici">
 
             <TextView
                 android:id="@+id/textView14"
@@ -39,6 +42,21 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="175dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView14">
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutRecursos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </ScrollView>
+
         </android.support.constraint.ConstraintLayout>
 
         <TextView
@@ -103,45 +121,70 @@
 
         <TextView
             android:id="@+id/textViewDataInici"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:gravity="center_vertical|center_horizontal"
             android:text="TextView"
             android:textColor="@android:color/black"
-            tools:layout_editor_absoluteY="162dp" />
+            app:layout_constraintEnd_toStartOf="@+id/divider2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
         <TextView
             android:id="@+id/textViewHoraInici"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:gravity="center_vertical|center_horizontal"
+            android:gravity="right|center_vertical|center_horizontal"
             android:text="TextView"
             android:textColor="@android:color/black"
-            tools:layout_editor_absoluteY="180dp" />
+            app:layout_constraintEnd_toEndOf="@+id/textViewDataInici"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDataInici" />
 
         <TextView
             android:id="@+id/textViewDataFi"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:gravity="center_vertical|center_horizontal"
             android:text="TextView"
             android:textColor="@android:color/black"
-            tools:layout_editor_absoluteX="192dp"
-            tools:layout_editor_absoluteY="162dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/divider2"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
         <TextView
             android:id="@+id/textViewHoraFi"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_vertical|center_horizontal"
+            android:gravity="right|center_vertical|center_horizontal"
             android:text="TextView"
             android:textColor="@android:color/black"
-            tools:layout_editor_absoluteX="192dp"
-            tools:layout_editor_absoluteY="180dp" />
+            app:layout_constraintEnd_toEndOf="@+id/textViewDataFi"
+            app:layout_constraintStart_toEndOf="@+id/divider2"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDataFi" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="1dp"
+            android:layout_height="551dp"
+            android:background="?android:attr/listDivider"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/textViewReserva"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textViewReserva"
+            tools:layout_editor_absoluteY="8dp" />
 
     </android.support.constraint.ConstraintLayout>
 

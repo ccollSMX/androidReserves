@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         url = getResources().getString(R.string.ip);
         urlLogin = url+"app_login.php";
+
         queue = Volley.newRequestQueue(this);
 
         editTextUsuari = (EditText) findViewById(R.id.editTextUsuari);
