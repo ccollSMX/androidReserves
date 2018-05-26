@@ -36,9 +36,8 @@ public class MainActivity extends AppCompatActivity {
     EditText editTextContrasenya;
     TextView textViewError;
     Button clickButton;
-    String url = getResources().getString(R.string.ip);
-    String urlLogin = url+"app_login.php";
-    String contrasenya = "";
+    String url;
+    String urlLogin;
     String usuari = "";
     RequestQueue queue;
     ConstraintLayout mainLayout;
@@ -49,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        url = getResources().getString(R.string.ip);
+        urlLogin = url+"app_login.php";
         queue = Volley.newRequestQueue(this);
 
         editTextUsuari = (EditText) findViewById(R.id.editTextUsuari);

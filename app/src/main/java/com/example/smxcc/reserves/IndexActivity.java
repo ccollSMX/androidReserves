@@ -46,8 +46,10 @@ public class IndexActivity extends AppCompatActivity {
     ScrollView scrollCurs;
     ScrollView scrollFinalitzades;
 
-    String url = this.getString(R.string.ip);
-    String urlLogin = url+"app_reserves.php";
+
+    String url;
+    String urlLogin;
+
     RequestQueue queue;
 
     @Override
@@ -58,9 +60,12 @@ public class IndexActivity extends AppCompatActivity {
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i("CREATE","no");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
+
+        url = this.getString(R.string.ip);
+        String urlLogin = url+"app_reserves.php";
+
         queue = Volley.newRequestQueue(this);
 
         textViewBenvinguda = (TextView) findViewById(R.id.textViewBenvinguda);
