@@ -184,7 +184,7 @@ public class IndexActivity extends AppCompatActivity {
         View fila = LayoutInflater.from(getApplicationContext())
                 .inflate(R.layout.row_reserva,ll,false);
 
-        ll.setOnClickListener( new View.OnClickListener() {
+        fila.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 veureReserva(res);

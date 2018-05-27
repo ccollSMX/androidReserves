@@ -1,11 +1,14 @@
 package com.example.smxcc.reserves;
 
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -100,17 +103,16 @@ public class ReservaActivity extends AppCompatActivity {
                             for(int i=0;i<response.length();i++){
                                 // Get current json object
                                 JSONObject res = response.getJSONObject(i);
-                                res.getString("nom");
-                                res.getString("descripcio");
-                                res.getInt("stock");
+                                if(res.isNull("nom")){
+                                    ConstraintLayout amagar = (ConstraintLayout) findViewById(R.id.constraintLayoutReserves);
+                                    amagar.setVisibility(View.GONE);
+                                }else{
+                                    Recurs recurs = new Recurs(res.getString("nom"), res.getString("descripcio"),
+                                            res.getDouble("quantiat"), res.getString("mesura")
+                                            , res.getDouble("valor"));
 
-                                Reserva reserva = new Reserva(res.getInt("id"),res.getString("data_inici"),
-                                        res.getString("data_fi"),res.getString("ubicacio"),
-                                        res.getInt("aprovada"),res.getString("nom"),
-                                        res.getString("descripcio"));
-
-                                linearLayoutAddView(linearLayourRecursos);
-
+                                    linearLayoutAddView(linearLayourRecursos,recurs);
+                                }
                             }
                         }catch (JSONException e){
                             e.printStackTrace();
@@ -130,9 +132,21 @@ public class ReservaActivity extends AppCompatActivity {
         queue.add(jsonArrayRequest);
     }
 
-    public void linearLayoutAddView(LinearLayout ll){
+    public void linearLayoutAddView(LinearLayout ll,Recurs rec){
         View fila = LayoutInflater.from(getApplicationContext())
                 .inflate(R.layout.row_recurs,ll,false);
+
+        TextView recurs = (TextView) fila.findViewById(R.id.textViewRecurs);
+        TextView descripcio = (TextView) fila.findViewById(R.id.textViewDescripcio);
+        TextView quantitat = (TextView) fila.findViewById(R.id.textViewQuantitat);
+        TextView valor = (TextView) fila.findViewById(R.id.textViewValor);
+        TextView mesura = (TextView) fila.findViewById(R.id.textViewMesura);
+
+        recurs.setText(rec.getNom());
+        descripcio.setText(rec.getDescripcio());
+        quantitat.setText(Double.toString(rec.getQuantitat()));
+        valor.setText("( "+Double.toString(rec.getValor()));
+        mesura.setText(rec.getMesura()+" )");
 
         ll.addView(fila);
     }
