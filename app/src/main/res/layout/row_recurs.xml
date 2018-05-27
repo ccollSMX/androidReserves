@@ -33,7 +33,7 @@
         android:singleLine="false"
         android:text="descripcio"
         android:textColor="@android:color/darker_gray"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:textStyle="italic"
         app:fontFamily="@font/coustard"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout6"

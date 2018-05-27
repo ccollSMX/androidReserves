@@ -3,6 +3,7 @@ package com.example.smxcc.reserves;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,7 +27,9 @@ import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 public class IndexActivity extends AppCompatActivity {
     TextView textViewBenvinguda;
@@ -39,11 +42,11 @@ public class IndexActivity extends AppCompatActivity {
     Button btnPendents;
     Button btnCurs;
     Button btnFinalitzades;
+    Button btnReservar;
 
     ScrollView scrollPendents;
     ScrollView scrollCurs;
     ScrollView scrollFinalitzades;
-
 
     String url;
     String serveiWeb;
@@ -53,6 +56,7 @@ public class IndexActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         carregarReserves(usuari,linearLayoutPendents,linearLayoutCurs,linearLayourFinalitzades);
+
         super.onResume();
     }
 
@@ -75,6 +79,7 @@ public class IndexActivity extends AppCompatActivity {
         btnPendents = (Button) findViewById(R.id.btnPendents);
         btnCurs = (Button) findViewById(R.id.btnCurs);
         btnFinalitzades = (Button) findViewById(R.id.btnFinalitzades);
+        btnReservar = (Button) findViewById(R.id.btnReservar);
 
         //scroll
         scrollPendents = (ScrollView) findViewById(R.id.scrollPendents);
@@ -121,6 +126,14 @@ public class IndexActivity extends AppCompatActivity {
             }
         });
 
+        btnReservar.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                    Intent intent = new Intent(getApplicationContext(), ReservarActivity.class);
+                    IndexActivity.this.startActivity(intent);
+            }
+        });
+
         //missatge de benvinguda agafant l'usuari(pasat per startactivity)
         usuari = getIntent().getExtras().getString("usuari");
         String benvingudaHtml = "PANTALLA D'INICI <span style=\"color: #303F9F\"'><b>"+usuari.toUpperCase()+"</b></span>";
@@ -161,6 +174,7 @@ public class IndexActivity extends AppCompatActivity {
                                     linearLayoutAddView(linearLayoutFinalitzades,reserva);
                                 }
                             }
+
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -210,13 +224,12 @@ public class IndexActivity extends AppCompatActivity {
         textViewFi.setText(dataFi[0]);
         textViewIniciH.setText(dataInici[1]);
         textViewFiH.setText(dataFi[1]);
-
-
         textViewObjecte.setText(reserva.getNomObjecte());
         textViewId.setText("Nº "+Integer.toString(reserva.getId()));
 
         //Afegir fila al layout
         ll.addView(fila);
+        ll.addView(TextView("kuk"));
     }
 
     public void veureReserva(Reserva r){
