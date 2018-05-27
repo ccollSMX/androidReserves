@@ -3,13 +3,13 @@ package com.example.smxcc.reserves;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
+import android.support.v4.app.FragmentManager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.SupportMapFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,6 +26,7 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 
 public class ReservaActivity extends AppCompatActivity {
     RequestQueue queue;
@@ -39,12 +41,6 @@ public class ReservaActivity extends AppCompatActivity {
     TextView textViewReserva;
     LinearLayout linearLayourRecursos;
     Reserva reserva;
-
-    @Override
-    protected void onResume(){
-        carregarRecursos(reserva.getId());
-        super.onResume();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,14 +75,29 @@ public class ReservaActivity extends AppCompatActivity {
         String[] dataInici = new String[2];
         String[] dataFi = new String[2];
 
-        dataInici = formatData(r.getInici());
-        dataFi = formatData(r.getFi());
+        dataInici = DataFormat.formatData(r.getInici());
+        dataFi = DataFormat.formatData(r.getFi());
 
         textViewObjecte.setText(r.getNomObjecte());
         textViewDataInici.setText(dataInici[0]);
         textViewHoraInici.setText(dataInici[1]);
         textViewDataFi.setText(dataFi[0]);
         textViewHoraFi.setText(dataFi[1]);
+    }
+
+    @Override
+    protected void onResume(){
+        carregarRecursos(reserva.getId());
+        carregarFragmentMap(reserva.getUbicacio());
+        super.onResume();
+    }
+
+    public void carregarFragmentMap(String ubicacio){
+        FrameLayout div = (FrameLayout) findViewById(R.id.frameLayoutMap);
+        SupportMapFragment a = SupportMapFragment.newInstance();
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.frameLayoutMap, new MapsActivity()).commit();
     }
 
     public void carregarRecursos(Integer id){
@@ -127,7 +138,6 @@ public class ReservaActivity extends AppCompatActivity {
                     }
                 }
         );
-
         // Add JsonArrayRequest to the RequestQueue
         queue.add(jsonArrayRequest);
     }
@@ -151,20 +161,4 @@ public class ReservaActivity extends AppCompatActivity {
         ll.addView(fila);
     }
 
-    public String[] formatData(String data){
-        String[] aux = new String[2];
-
-        SimpleDateFormat readingFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        SimpleDateFormat outputFormatData = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat outputFormatHora = new SimpleDateFormat("HH:mm");
-        Date d = null;
-
-        try {
-            d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(data);
-        } catch (ParseException e) {e.printStackTrace();}
-
-        aux[0] = outputFormatData.format(d);
-        aux[1] = outputFormatHora.format(d);
-        return aux;
-    }
 }

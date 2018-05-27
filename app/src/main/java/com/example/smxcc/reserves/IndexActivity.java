@@ -22,6 +22,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -194,21 +195,26 @@ public class IndexActivity extends AppCompatActivity {
         TextView textViewObjecte = fila.findViewById(R.id.textViewObjecte);
         TextView textViewInici = fila.findViewById(R.id.textViewInici);
         TextView textViewFi = fila.findViewById(R.id.textViewFi);
+        TextView textViewId = fila.findViewById(R.id.textViewId);
+        TextView textViewIniciH = fila.findViewById(R.id.textViewIniciH);
+        TextView textViewFiH = fila.findViewById(R.id.textViewFiH);
 
-        try {
-            SimpleDateFormat readingFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy' HORA:'HH:mm");
-            Date d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(reserva.getInici());
-            Date dFi = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(reserva.getInici());
+        String[] dataInici = new String[2];
+        String[] dataFi = new String[2];
 
-            //Actualitzar valors a l'interficie
-            textViewInici.setText(outputFormat.format(d));
-            textViewFi.setText(outputFormat.format(dFi));
-            textViewObjecte.setText(reserva.getNomObjecte());
-            textViewObjecte.setId(reserva.getId());
-        } catch (ParseException e) {
-            Log.i("hey",e.getMessage());
-        }
+        dataInici = DataFormat.formatData(reserva.getInici());
+        dataFi = DataFormat.formatData(reserva.getFi());
+
+        //Actualitzar valors a l'interficie
+        textViewInici.setText(dataInici[0]);
+        textViewFi.setText(dataFi[0]);
+        textViewIniciH.setText(dataInici[1]);
+        textViewFiH.setText(dataFi[1]);
+
+
+        textViewObjecte.setText(reserva.getNomObjecte());
+        textViewId.setText("Nº "+Integer.toString(reserva.getId()));
+
         //Afegir fila al layout
         ll.addView(fila);
     }

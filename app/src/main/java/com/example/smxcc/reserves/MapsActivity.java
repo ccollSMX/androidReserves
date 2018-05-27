@@ -1,7 +1,11 @@
 package com.example.smxcc.reserves;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -10,18 +14,19 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_maps, container, false);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
+
         mapFragment.getMapAsync(this);
+        return view;
     }
 
 
@@ -42,5 +47,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng platja = new LatLng(41.817570, 3.067524);
         mMap.addMarker(new MarkerOptions().position(platja).title("Platja d'aro"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(platja,18));
+        mMap.getUiSettings().setScrollGesturesEnabled(false);
+        mMap.getUiSettings().setZoomControlsEnabled(false);
+        mMap.getUiSettings().setAllGesturesEnabled(false);
+        mMap.getUiSettings().setZoomGesturesEnabled(false);
     }
 }

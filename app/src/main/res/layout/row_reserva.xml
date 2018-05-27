@@ -10,7 +10,8 @@
         android:id="@+id/textViewObjecte"
         android:layout_width="93dp"
         android:layout_height="0dp"
-        android:gravity="center_vertical"
+        android:layout_marginTop="2dp"
+        android:gravity="top|left"
         android:maxLines="2"
         android:singleLine="false"
         android:text="TextView"
@@ -21,7 +22,7 @@
         app:fontFamily="@font/lilita_one"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout3" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewId" />
 
     <View
         android:id="@+id/divider"
@@ -43,10 +44,10 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
-        android:layout_height="54dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="8dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -55,19 +56,43 @@
             android:id="@+id/textViewInici"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
             android:text="TextView"
             android:textColor="#000"
-            android:textSize="15sp"
+            android:textSize="14sp"
             app:fontFamily="@font/coustard" />
+
+        <TextView
+            android:id="@+id/textViewIniciH"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:text="TextView"
+            android:textColor="@android:color/black"
+            app:fontFamily="@font/coustard" />
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
 
         <TextView
             android:id="@+id/textViewFi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:gravity="right|center_vertical"
             android:text="TextView"
             android:textColor="@android:color/holo_red_light"
-            android:textSize="15sp"
+            app:fontFamily="@font/coustard" />
+
+        <TextView
+            android:id="@+id/textViewFiH"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:text="TextView"
+            android:textColor="@android:color/holo_red_light"
             app:fontFamily="@font/coustard" />
     </LinearLayout>
 
@@ -90,7 +115,6 @@
             android:gravity="right"
             android:text="INICI:"
             android:textColor="@android:color/black"
-            android:textSize="15sp"
             android:textStyle="bold"
             app:fontFamily="@font/coustard" />
 
@@ -98,13 +122,25 @@
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="19dp"
             android:gravity="right"
             android:text="FI:"
             android:textColor="@android:color/black"
-            android:textSize="15sp"
             android:textStyle="bold"
             app:fontFamily="@font/coustard" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/lilita_one"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

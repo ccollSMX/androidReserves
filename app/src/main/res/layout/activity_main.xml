@@ -71,6 +71,7 @@
         android:ems="10"
         android:hint="Recursos Humans"
         android:inputType="textPersonName"
+        android:text="admin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewUsuari" />
@@ -105,6 +106,7 @@
         android:ems="10"
         android:hint="***"
         android:inputType="textPassword"
+        android:text="admin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewContrasenya" />
