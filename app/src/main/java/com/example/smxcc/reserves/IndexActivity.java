@@ -229,7 +229,6 @@ public class IndexActivity extends AppCompatActivity {
 
         //Afegir fila al layout
         ll.addView(fila);
-        ll.addView(TextView("kuk"));
     }
 
     public void veureReserva(Reserva r){
