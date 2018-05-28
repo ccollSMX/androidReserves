@@ -7,7 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
+
+import java.sql.Time;
 
 
 public class ReservarActivity extends AppCompatActivity {
@@ -17,7 +21,11 @@ public class ReservarActivity extends AppCompatActivity {
     TextView textViewFi;
     EditText editTextInici;
     EditText editTextFi;
+    EditText editTextIniciH;
+    EditText editTextFiH;
     CalendarView calendarView;
+    TimePicker timeView;
+    LinearLayout fons;
     boolean data;
 
     @Override
@@ -31,6 +39,7 @@ public class ReservarActivity extends AppCompatActivity {
 
     public void inicialitzarViews(){
         parent = (ConstraintLayout) findViewById(R.id.constraintLayoutReservar);
+        fons = (LinearLayout) findViewById(R.id.linearLayoutFons);
 
         textViewInici = (TextView) findViewById(R.id.textViewInici);
         textViewFi = (TextView) findViewById(R.id.textViewFi);
@@ -38,11 +47,16 @@ public class ReservarActivity extends AppCompatActivity {
 
         editTextInici = (EditText) findViewById(R.id.editTextInici);
         editTextFi = (EditText) findViewById(R.id.editTextFi);
+        editTextIniciH = (EditText) findViewById(R.id.editTextIniciH);
+        editTextFiH = (EditText) findViewById(R.id.editTextFiH);
 
         calendarView = (CalendarView) findViewById(R.id.calendarView);
         calendarView.setFirstDayOfWeek(2);
         calendarView.setVisibility(View.GONE);
         calendarView.setMinDate(System.currentTimeMillis() - 1000);
+
+        timeView = findViewById(R.id.timeView);
+        timeView.setVisibility(View.GONE);
     }
 
     public void listenersViews(){
@@ -71,6 +85,27 @@ public class ReservarActivity extends AppCompatActivity {
                     editTextFi.setText(year+"/"+(month+1)+"/"+day);
                 }
                 mostrarCalendari(false);
+                timeView.setVisibility(View.VISIBLE);
+            }
+        });
+
+        timeView.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                Time t = new Time(hourOfDay,minute,00);
+                if(data){
+                    editTextIniciH.setText(t.toString());
+                }else{
+                    editTextFiH.setText(t.toString());
+                }
+            }
+        });
+
+        fons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostrarCalendari(false);
+                timeView.setVisibility(View.GONE);
             }
         });
     }
