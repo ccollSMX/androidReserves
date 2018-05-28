@@ -188,7 +188,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textViewObjecte"
+            android:id="@+id/textViewTitolObjecte"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -206,10 +206,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/textViewObjecte">
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitolObjecte">
 
             <TextView
-                android:id="@+id/textViewInici"
+                android:id="@+id/textViewFi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

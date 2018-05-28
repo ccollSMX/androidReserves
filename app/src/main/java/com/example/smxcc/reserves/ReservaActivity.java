@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.support.v4.app.FragmentManager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,10 +21,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 public class ReservaActivity extends AppCompatActivity {
@@ -64,7 +59,7 @@ public class ReservaActivity extends AppCompatActivity {
     }
 
     public void carregarViews(Reserva r){
-        textViewObjecte = (TextView) findViewById(R.id.textViewObjecte);
+        textViewObjecte = (TextView) findViewById(R.id.textViewTitolObjecte);
         textViewDataInici = (TextView) findViewById(R.id.textViewDataInici);
         textViewHoraInici = (TextView) findViewById(R.id.textViewHoraInici);
         textViewDataFi = (TextView) findViewById(R.id.textViewDataFi);

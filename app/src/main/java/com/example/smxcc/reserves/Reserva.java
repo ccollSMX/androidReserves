@@ -1,5 +1,7 @@
 package com.example.smxcc.reserves;
 
+import java.util.ArrayList;
+
 public class Reserva {
     Integer id;
     String inici;
@@ -8,6 +10,7 @@ public class Reserva {
     int aprovada;
     String nomObjecte;
     String descObjecte;
+    ArrayList<Recurs> recursos = new ArrayList<Recurs>();
 
     Reserva(Integer id,String inici, String fi, String ubicacio, int aprovada, String nomObjecte, String descObjecte){
         this.id = id;
@@ -46,4 +49,11 @@ public class Reserva {
     public String getDescObjecte() {
         return descObjecte;
     }
+
+    public ArrayList<Recurs> getRecursos(){return recursos;}
+
+    public void afegirRecursos(Recurs r){
+        recursos.add(r);
+    }
+
 }

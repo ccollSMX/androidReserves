@@ -3,9 +3,7 @@ package com.example.smxcc.reserves;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -23,13 +21,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 
 public class IndexActivity extends AppCompatActivity {
     TextView textViewBenvinguda;
@@ -206,8 +197,8 @@ public class IndexActivity extends AppCompatActivity {
             }
         });
 
-        TextView textViewObjecte = fila.findViewById(R.id.textViewObjecte);
-        TextView textViewInici = fila.findViewById(R.id.textViewInici);
+        TextView textViewObjecte = fila.findViewById(R.id.textViewTitolObjecte);
+        TextView textViewInici = fila.findViewById(R.id.textViewFi);
         TextView textViewFi = fila.findViewById(R.id.textViewFi);
         TextView textViewId = fila.findViewById(R.id.textViewId);
         TextView textViewIniciH = fila.findViewById(R.id.textViewIniciH);
