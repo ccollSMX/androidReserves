@@ -3,5 +3,5 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_main">Login</string>
     <!--<string name="ip">http://192.168.1.12/empresa/</string>-->
-    <string name="ip">http://10.23.0.247/empresa/</string>
+    <string name="ip">http://192.168.1.14/empresa/</string>
 </resources>

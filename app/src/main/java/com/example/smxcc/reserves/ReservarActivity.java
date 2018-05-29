@@ -135,21 +135,24 @@ public class ReservarActivity extends AppCompatActivity {
             }
         });
 
-        spinnerObjectes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                memObjecte = (Objecte)adapterView.getItemAtPosition(i);
-                textViewObjecte.setText(memObjecte.toString());
-                textViewObjecte.setVisibility(View.VISIBLE);
-                buttonObjecte.setVisibility(View.VISIBLE);
+       spinnerObjectes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+           @Override
+           public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               if(position == 0){
+               }else{
+                   memObjecte = (Objecte)parent.getItemAtPosition(position);
+                   textViewObjecte.setText(memObjecte.toString());
+                   textViewObjecte.setVisibility(View.VISIBLE);
+                   buttonObjecte.setVisibility(View.VISIBLE);
+                   spinnerObjectes.setVisibility(View.GONE);
+               }
+           }
 
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+           @Override
+           public void onNothingSelected(AdapterView<?> parent) {
+                Log.i("hola","no entra mai");
+           }
+       });
 
         buttonObjecte.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,6 +160,8 @@ public class ReservarActivity extends AppCompatActivity {
                 memObjecte = null;
                 textViewObjecte.setVisibility(View.GONE);
                 buttonObjecte.setVisibility(View.GONE);
+                spinnerObjectes.setVisibility(View.VISIBLE);
+                spinnerObjectes.setSelection(0);
             }
         });
     }
@@ -180,13 +185,14 @@ public class ReservarActivity extends AppCompatActivity {
     }
 
     public void carregarDades(){
+        //carregar dades objecte i recurs
         carregarDadesObjecte();
     }
 
     public void carregarDadesObjecte(){
         ArrayAdapter<Objecte> spinnerArrayAdapter = new ArrayAdapter<Objecte>(this,R.layout.spinner_item
                 ,new Objecte[]{
-                new Objecte("prova","funciona la prova"),
+                new Objecte("Tria l'objecte...","funciona la prova"),
                 new Objecte("prova2", "si que funciona si")
         });
 
