@@ -209,7 +209,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewTitolObjecte">
 
             <TextView
-                android:id="@+id/textViewFi"
+                android:id="@+id/textViewInici"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -222,7 +222,7 @@
                 tools:layout_editor_absoluteY="113dp" />
 
             <TextView
-                android:id="@+id/textViewFi"
+                android:id="@+id/textViewInici"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

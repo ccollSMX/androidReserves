@@ -198,7 +198,7 @@ public class IndexActivity extends AppCompatActivity {
         });
 
         TextView textViewObjecte = fila.findViewById(R.id.textViewTitolObjecte);
-        TextView textViewInici = fila.findViewById(R.id.textViewFi);
+        TextView textViewInici = fila.findViewById(R.id.textViewInici);
         TextView textViewFi = fila.findViewById(R.id.textViewFi);
         TextView textViewId = fila.findViewById(R.id.textViewId);
         TextView textViewIniciH = fila.findViewById(R.id.textViewIniciH);

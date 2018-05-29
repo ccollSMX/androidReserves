@@ -162,10 +162,10 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginStart="16dp"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="@+id/textViewFi"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewInici"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textViewInici"
-                app:layout_constraintTop_toTopOf="@+id/textViewFi">
+                app:layout_constraintTop_toTopOf="@+id/textViewInici">
 
                 <EditText
                     android:id="@+id/editTextFi"
@@ -176,10 +176,10 @@
                     android:focusable="false"
                     android:gravity="right|center_vertical"
                     android:inputType="date"
-                    app:layout_constraintBottom_toBottomOf="@+id/textViewFi"
+                    app:layout_constraintBottom_toBottomOf="@+id/textViewInici"
                     app:layout_constraintEnd_toEndOf="@+id/editTextInici"
                     app:layout_constraintStart_toStartOf="@+id/editTextInici"
-                    app:layout_constraintTop_toTopOf="@+id/textViewFi" />
+                    app:layout_constraintTop_toTopOf="@+id/textViewInici" />
 
                 <EditText
                     android:id="@+id/editTextFiH"
@@ -213,7 +213,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textViewFi"
+                android:id="@+id/textViewInici"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"

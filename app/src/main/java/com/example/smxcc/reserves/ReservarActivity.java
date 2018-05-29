@@ -64,7 +64,7 @@ public class ReservarActivity extends AppCompatActivity {
         buttonObjecte = (Button) findViewById(R.id.buttonObjecte);
 
         textViewInici = (TextView) findViewById(R.id.textViewInici);
-        textViewFi = (TextView) findViewById(R.id.textViewFi);
+        textViewFi = (TextView) findViewById(R.id.textViewInici);
         textViewTitolObjecte = (TextView) findViewById(R.id.textViewTitolObjecte);
         textViewObjecte = (TextView) findViewById(R.id.textViewObjecte);
 
