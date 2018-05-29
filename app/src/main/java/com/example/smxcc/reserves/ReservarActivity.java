@@ -4,29 +4,48 @@ import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import org.w3c.dom.Text;
+
 import java.sql.Time;
+import java.util.ArrayList;
 
 
 public class ReservarActivity extends AppCompatActivity {
     ConstraintLayout parent;
+    Spinner spinnerObjectes;
+    Button buttonObjecte;
+
     TextView textViewTitolObjecte;
+    TextView textViewObjecte;
     TextView textViewInici;
     TextView textViewFi;
+
     EditText editTextInici;
     EditText editTextFi;
     EditText editTextIniciH;
     EditText editTextFiH;
+
     CalendarView calendarView;
     TimePicker timeView;
     LinearLayout fons;
     boolean data;
+
+    //MEMORIA OBJECTES RECURSOS
+    Objecte memObjecte;
+    ArrayList<Recurs> memRecursos;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +54,19 @@ public class ReservarActivity extends AppCompatActivity {
 
         inicialitzarViews();
         listenersViews();
+        carregarDades();
     }
 
     public void inicialitzarViews(){
         parent = (ConstraintLayout) findViewById(R.id.constraintLayoutReservar);
         fons = (LinearLayout) findViewById(R.id.linearLayoutFons);
+        spinnerObjectes = (Spinner) findViewById(R.id.spinnerObjecte);
+        buttonObjecte = (Button) findViewById(R.id.buttonObjecte);
 
         textViewInici = (TextView) findViewById(R.id.textViewInici);
         textViewFi = (TextView) findViewById(R.id.textViewFi);
         textViewTitolObjecte = (TextView) findViewById(R.id.textViewTitolObjecte);
+        textViewObjecte = (TextView) findViewById(R.id.textViewObjecte);
 
         editTextInici = (EditText) findViewById(R.id.editTextInici);
         editTextFi = (EditText) findViewById(R.id.editTextFi);
@@ -57,8 +80,10 @@ public class ReservarActivity extends AppCompatActivity {
 
         timeView = findViewById(R.id.timeView);
         timeView.setVisibility(View.GONE);
+        timeView.setIs24HourView(true);
     }
 
+    //**********AGRUPACIÓ DE TOTS ELS LISTENERS***************************************************\\
     public void listenersViews(){
         editTextInici.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +120,7 @@ public class ReservarActivity extends AppCompatActivity {
                 Time t = new Time(hourOfDay,minute,00);
                 if(data){
                     editTextIniciH.setText(t.toString());
+
                 }else{
                     editTextFiH.setText(t.toString());
                 }
@@ -108,8 +134,34 @@ public class ReservarActivity extends AppCompatActivity {
                 timeView.setVisibility(View.GONE);
             }
         });
+
+        spinnerObjectes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                memObjecte = (Objecte)adapterView.getItemAtPosition(i);
+                textViewObjecte.setText(memObjecte.toString());
+                textViewObjecte.setVisibility(View.VISIBLE);
+                buttonObjecte.setVisibility(View.VISIBLE);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        buttonObjecte.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                memObjecte = null;
+                textViewObjecte.setVisibility(View.GONE);
+                buttonObjecte.setVisibility(View.GONE);
+            }
+        });
     }
 
+    //**********AMAGA O VISUALITZA PARTS DE L'INTERFICIE GRAFICA PER VEURE BE EL CALENDARI********\\
     public void mostrarCalendari(boolean condicio){
         if(condicio){
             calendarView.setVisibility(View.VISIBLE);
@@ -125,5 +177,19 @@ public class ReservarActivity extends AppCompatActivity {
             editTextInici.setVisibility(View.VISIBLE);
             editTextFi.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void carregarDades(){
+        carregarDadesObjecte();
+    }
+
+    public void carregarDadesObjecte(){
+        ArrayAdapter<Objecte> spinnerArrayAdapter = new ArrayAdapter<Objecte>(this,R.layout.spinner_item
+                ,new Objecte[]{
+                new Objecte("prova","funciona la prova"),
+                new Objecte("prova2", "si que funciona si")
+        });
+
+        spinnerObjectes.setAdapter(spinnerArrayAdapter);
     }
 }

@@ -1,10 +1,10 @@
 package com.example.smxcc.reserves;
 
 public class Recurs {
-    String nom;
-    String descripcio;
-    Double quantitat;
-    String mesura;
+    private String nom;
+    private String descripcio;
+    private Double quantitat;
+    private String mesura;
 
     public String getNom() {
         return nom;
@@ -54,5 +54,9 @@ public class Recurs {
         this.quantitat = quantitat;
         this.mesura = mesura;
         this.valor = valor;
+    }
+
+    public String toString(){
+        return (nom);
     }
 }
