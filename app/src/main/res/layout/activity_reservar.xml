@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:text="OBJECTE"
             android:textColor="#303F9F"
             android:textSize="20sp"
@@ -31,6 +31,20 @@
 
         <View
             android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="@+id/spinnerRecursos"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/spinnerRecursos"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerRecursos" />
+
+        <View
+            android:id="@+id/divider7"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider"
@@ -65,6 +79,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewTitolObjecte" />
 
+        <LinearLayout
+            android:id="@+id/linearLayoutRecursos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/divider"></LinearLayout>
+
         <TextView
             android:id="@+id/textViewObjecte"
             android:layout_width="wrap_content"
@@ -84,7 +108,7 @@
 
         <Button
             android:id="@+id/buttonObjecte"
-            android:layout_width="25dp"
+            android:layout_width="20dp"
             android:layout_height="0dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
@@ -94,6 +118,34 @@
             app:layout_constraintBottom_toBottomOf="@+id/textViewObjecte"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textViewObjecte" />
+
+        <TextView
+            android:id="@+id/textViewTitolReserves"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="32dp"
+            android:text="RECURSOS"
+            android:textColor="#303F9F"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:fontFamily="@font/lilita_one"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewObjecte" />
+
+        <Spinner
+            android:id="@+id/spinnerRecursos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:popupBackground="#ebedf9"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitolReserves" />
 
         <TextView
             android:id="@+id/textView10"
@@ -109,6 +161,23 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="32dp"
+            android:background="?attr/actionModeSplitBackground"
+            android:text="COMPLETAR RESERVA"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutRecursos" />
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout2"
@@ -207,7 +276,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:gravity="right|center_vertical"
-                android:text="INICI"
+                android:text="INICI:"
                 android:textColor="@android:color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -225,7 +294,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
                 android:gravity="right|center_vertical"
-                android:text="FI"
+                android:text="FI:"
                 android:textColor="@android:color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -245,7 +314,7 @@
                 android:layout_marginStart="16dp"
                 android:background="#ebedf9"
                 android:minWidth="50dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -262,7 +331,7 @@
                 android:layout_marginStart="16dp"
                 android:background="#ebedf9"
                 android:minWidth="50dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

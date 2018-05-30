@@ -13,7 +13,8 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:maxWidth="80dp"
+        android:maxWidth="78dp"
+        android:minWidth="78dp"
         android:text="Recurs"
         android:textColor="@android:color/black"
         android:textSize="16sp"
@@ -26,7 +27,9 @@
         android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:maxLines="5"
         android:minLines="1"
@@ -37,6 +40,7 @@
         android:textStyle="italic"
         app:fontFamily="@font/coustard"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout6"
+        app:layout_constraintStart_toEndOf="@+id/textViewRecurs"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View

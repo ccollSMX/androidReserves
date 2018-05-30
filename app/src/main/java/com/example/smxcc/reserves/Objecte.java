@@ -10,7 +10,13 @@ public class Objecte {
         this.descripcio = descripcio;
     }
 
+    Objecte(int id,String nom, String descripcio){
+        this.id = id;
+        this.nom = nom;
+        this.descripcio = descripcio;
+    }
+
     public String toString(){
-        return (nom);
+        return (nom.toUpperCase());
     }
 }
