@@ -41,13 +41,18 @@ public class IndexActivity extends AppCompatActivity {
 
     String url;
     String serveiWeb;
+    boolean oncreate;
 
     RequestQueue queue;
 
     @Override
     protected void onResume(){
-        carregarReserves(usuari,linearLayoutPendents,linearLayoutCurs,linearLayourFinalitzades);
+        if(!oncreate){
+            carregarReserves(usuari,linearLayoutPendents,linearLayoutCurs,linearLayourFinalitzades);
 
+        }else{
+            oncreate = false;
+        }
         super.onResume();
     }
 
@@ -130,6 +135,9 @@ public class IndexActivity extends AppCompatActivity {
         String benvingudaHtml = "PANTALLA D'INICI <span style=\"color: #303F9F\"'><b>"+usuari.toUpperCase()+"</b></span>";
         textViewBenvinguda.setText(Html.fromHtml(benvingudaHtml));
         textViewBenvinguda.setVisibility(View.VISIBLE);
+
+        carregarReserves(usuari,linearLayoutPendents,linearLayoutCurs,linearLayourFinalitzades);
+        oncreate=true;
     }
 
 
