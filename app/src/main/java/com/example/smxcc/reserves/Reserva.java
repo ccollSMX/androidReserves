@@ -22,6 +22,12 @@ public class Reserva {
         this.descObjecte = descObjecte;
     }
 
+    Reserva(String inici,String fi, String ubicacio){
+        this.inici = inici;
+        this.fi = fi;
+        this.ubicacio = ubicacio;
+    }
+
     public Integer getId() {
         return id;
     }

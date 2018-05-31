@@ -126,6 +126,7 @@ public class IndexActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                     Intent intent = new Intent(getApplicationContext(), ReservarActivity.class);
+                    intent.putExtra("usuari",usuari);
                     IndexActivity.this.startActivity(intent);
             }
         });

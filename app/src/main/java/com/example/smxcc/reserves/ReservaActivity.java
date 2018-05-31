@@ -91,8 +91,15 @@ public class ReservaActivity extends AppCompatActivity {
         FrameLayout div = (FrameLayout) findViewById(R.id.frameLayoutMap);
         SupportMapFragment a = SupportMapFragment.newInstance();
 
+
+        //Bundle bndle = new Bundle();
+        //String[] ub = reserva.getUbicacio().split(" ");
+        //bndle.putDouble("lat",Double.parseDouble(ub[0]));
+        //bndle.putDouble("lon",Double.parseDouble(ub[1]));
+        //bndle.putInt("Zoom",Integer.parseInt(ub[2]));
+
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.frameLayoutMap, new MapsActivity()).commit();
+            .add(R.id.frameLayoutMap, new MapsActivity()).commit();
     }
 
     public void carregarRecursos(Integer id){

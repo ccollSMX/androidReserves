@@ -88,7 +88,7 @@ public class Recurs {
     }
 
     public String toString(){
-        return (nom);
+        return (nom.toUpperCase());
     }
 
     public void posicio(int posicio){

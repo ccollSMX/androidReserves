@@ -26,4 +26,21 @@ public class DataFormat {
         aux[1] = outputFormatHora.format(d);
         return aux;
     }
+
+    public static String formatDataTime(String data,String time){
+        String aux = "";
+
+
+        SimpleDateFormat outputFormatData = new SimpleDateFormat("yyyy/MM/dd");
+        Date d = null;
+        Date s = null;
+
+        try {
+            d = new SimpleDateFormat("dd/MM/yyyy").parse(data);
+        } catch (ParseException e) {e.printStackTrace();}
+
+        aux = outputFormatData.format(d)+" "+time;
+
+        return aux;
+    }
 }

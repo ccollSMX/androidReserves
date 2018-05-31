@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -24,6 +25,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +35,8 @@ import org.w3c.dom.Text;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 
 
@@ -41,6 +46,11 @@ public class ReservarActivity extends AppCompatActivity {
     Spinner spinnerRecursos;
 
     Button buttonObjecte;
+    Button buttonFerReserva;
+    Button buttonInici;
+    Button buttonIniciH;
+    Button buttonFi;
+    Button buttonFiH;
 
     TextView textViewTitolObjecte;
     TextView textViewObjecte;
@@ -64,13 +74,28 @@ public class ReservarActivity extends AppCompatActivity {
 
     String url;
     String serveiWeb;
+    String usuari ="";
 
     RequestQueue queue;
 
     @Override
+    protected void onResume(){
+        carregarFragmentMap();
+        super.onResume();
+    }
+
+    public void carregarFragmentMap(){
+        FrameLayout div = (FrameLayout) findViewById(R.id.frameLayout);
+        SupportMapFragment b = SupportMapFragment.newInstance();
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.frameLayout, new MapsActivity()).commit();
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservar);
+        usuari = getIntent().getExtras().getString("usuari");
 
         memRecursos = new ArrayList<Recurs>();
         url = this.getString(R.string.ip);
@@ -80,6 +105,59 @@ public class ReservarActivity extends AppCompatActivity {
         inicialitzarViews();
         listenersViews();
         carregarDades();
+
+        buttonFerReserva.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(comprovarInformacio()){
+                    String auxUbicacio = "41.817570 3.067524 18";
+
+                    String inici = DataFormat.formatDataTime(editTextInici.getText().toString(),editTextIniciH.getText().toString());
+                    String fi = DataFormat.formatDataTime(editTextFi.getText().toString(),editTextFiH.getText().toString());
+                    Reserva r = new Reserva(inici,fi,auxUbicacio);
+                    Gson gsonObjecte = new Gson();
+
+                    String jsonObjecte = gsonObjecte.toJson(memObjecte);
+                    String jsonRecursos = gsonObjecte.toJson(memRecursos);
+                    String jsonReserva = gsonObjecte.toJson(r);
+                    Log.i("hola",jsonReserva);
+                    Log.i("hola",jsonObjecte);
+                    Log.i("hola",usuari);
+                    Log.i("hola",jsonRecursos);
+
+                    JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                            Request.Method.GET,
+                            url+"app_reservar.php?reserva="+jsonReserva+"&usuari="+usuari+"&objecte="+jsonObjecte+"&recursos="+jsonRecursos,
+                            null,
+                            new Response.Listener<JSONArray>() {
+                                @Override
+                                public void onResponse(JSONArray response) {
+
+                                }
+                            },
+                            new Response.ErrorListener(){
+                                @Override
+                                public void onErrorResponse(VolleyError error){
+                                    // Do something when error occurrer
+                                    Log.i("hola",error.getMessage());
+                                }
+                            }
+                    );
+
+                    queue.add(jsonArrayRequest);
+                }
+            }
+        });
+    }
+
+    public boolean comprovarInformacio(){
+        if(editTextInici.getText().length()>0 && editTextIniciH.getText().length()>0 &&
+                editTextFi.getText().length()>0 && editTextFiH.getText().length()>0 &&
+                textViewObjecte.getVisibility()==View.VISIBLE){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public void inicialitzarViews(){
@@ -88,7 +166,13 @@ public class ReservarActivity extends AppCompatActivity {
         linearLayoutRecursos = (LinearLayout) findViewById(R.id.linearLayoutRecursos);
         spinnerObjectes = (Spinner) findViewById(R.id.spinnerObjecte);
         spinnerRecursos = (Spinner) findViewById(R.id.spinnerRecursos);
+
         buttonObjecte = (Button) findViewById(R.id.buttonObjecte);
+        buttonFerReserva = (Button) findViewById(R.id.buttonFerReserva);
+        buttonInici = (Button) findViewById(R.id.buttonInici);
+        buttonIniciH = (Button) findViewById(R.id.buttonIniciH);
+        buttonFi = (Button) findViewById(R.id.buttonFi);
+        buttonFiH = (Button) findViewById(R.id.buttonFiH);
 
         textViewInici = (TextView) findViewById(R.id.textViewInici);
         textViewFi = (TextView) findViewById(R.id.textViewInici);
@@ -108,24 +192,40 @@ public class ReservarActivity extends AppCompatActivity {
         timeView = findViewById(R.id.timeView);
         timeView.setVisibility(View.GONE);
         timeView.setIs24HourView(true);
-
-
     }
 
     //**********AGRUPACIÓ DE TOTS ELS LISTENERS***************************************************\\
     public void listenersViews(){
-        editTextInici.setOnClickListener(new View.OnClickListener() {
+        buttonInici.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 mostrarCalendari(true);
                 data = true;
             }
         });
 
-        editTextFi.setOnClickListener(new View.OnClickListener() {
+        buttonIniciH.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                timeView.setVisibility(View.VISIBLE);
+                intervalDateShow(false);
+                data = true;
+            }
+        });
+
+        buttonFi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 mostrarCalendari(true);
+                data = false;
+            }
+        });
+
+        buttonFiH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timeView.setVisibility(View.VISIBLE);
+                intervalDateShow(false);
                 data = false;
             }
         });
@@ -134,12 +234,11 @@ public class ReservarActivity extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
                 if(data){
-                    editTextInici.setText(year+"/"+(month+1)+"/"+day);
+                    editTextInici.setText(day+"/"+(month+1)+"/"+year);
                 }else{
-                    editTextFi.setText(year+"/"+(month+1)+"/"+day);
+                    editTextFi.setText(day+"/"+(month+1)+"/"+year);
                 }
                 mostrarCalendari(false);
-                timeView.setVisibility(View.VISIBLE);
             }
         });
 
@@ -149,7 +248,6 @@ public class ReservarActivity extends AppCompatActivity {
                 Time t = new Time(hourOfDay,minute,00);
                 if(data){
                     editTextIniciH.setText(t.toString());
-
                 }else{
                     editTextFiH.setText(t.toString());
                 }
@@ -168,7 +266,7 @@ public class ReservarActivity extends AppCompatActivity {
            @Override
            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                if(position == 0){
-                   ((TextView) parent.getChildAt(0)).setTextColor(Color.GRAY);
+                   //((TextView) parent.getChildAt(0)).setTextColor(Color.GRAY);
                }else{
                    memObjecte = (Objecte)parent.getItemAtPosition(position);
                    textViewObjecte.setText(memObjecte.toString().toUpperCase());
@@ -188,7 +286,7 @@ public class ReservarActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 0){
-                    ((TextView) parent.getChildAt(0)).setTextColor(Color.GRAY);
+                    //((TextView) parent.getChildAt(0)).setTextColor(Color.GRAY);
                 }else{
                     final View fila = LayoutInflater.from(getApplicationContext())
                             .inflate(R.layout.row_recurs_reserva,linearLayoutRecursos,false);
@@ -205,7 +303,6 @@ public class ReservarActivity extends AppCompatActivity {
                     buttonRecrusos.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Log.i("hola",recAux.toString());
                             memRecursos.remove(recAux);
                             linearLayoutRecursos.removeView(fila);
                         }
@@ -233,25 +330,41 @@ public class ReservarActivity extends AppCompatActivity {
             }
         });
     }
+    //**********FINAL AGRUPACIÓ DE TOTS ELS LISTENERS*********************************************\\
 
     //**********AMAGA O VISUALITZA PARTS DE L'INTERFICIE GRAFICA PER VEURE BE EL CALENDARI********\\
     public void mostrarCalendari(boolean condicio){
         if(condicio){
             calendarView.setVisibility(View.VISIBLE);
             calendarView.setFocusable(true);
-            textViewInici.setVisibility(View.INVISIBLE);
-            textViewFi.setVisibility(View.INVISIBLE);
-            editTextInici.setVisibility(View.INVISIBLE);
-            editTextFi.setVisibility(View.INVISIBLE);
+            intervalDateShow(false);
         }else {
             calendarView.setVisibility(View.GONE);
+            intervalDateShow(true);
+        }
+    }
+
+    public void intervalDateShow(boolean show){
+        if(show){
             textViewInici.setVisibility(View.VISIBLE);
             textViewFi.setVisibility(View.VISIBLE);
             editTextInici.setVisibility(View.VISIBLE);
             editTextFi.setVisibility(View.VISIBLE);
+            buttonInici.setVisibility(View.VISIBLE);
+            buttonIniciH.setVisibility(View.VISIBLE);
+            buttonFi.setVisibility(View.VISIBLE);
+            buttonFiH.setVisibility(View.VISIBLE);
+        }else{
+            textViewInici.setVisibility(View.INVISIBLE);
+            textViewFi.setVisibility(View.INVISIBLE);
+            editTextInici.setVisibility(View.INVISIBLE);
+            editTextFi.setVisibility(View.INVISIBLE);
+            buttonInici.setVisibility(View.INVISIBLE);
+            buttonIniciH.setVisibility(View.INVISIBLE);
+            buttonFi.setVisibility(View.INVISIBLE);
+            buttonFiH.setVisibility(View.INVISIBLE);
         }
     }
-
     public void carregarDades(){
         //carregar dades objecte i recurs
         carregarDadesObjecte();
@@ -302,7 +415,7 @@ public class ReservarActivity extends AppCompatActivity {
 
     public void carregarDadesRecursos(){
         final ArrayAdapter<Recurs> spinnerArrayAdapterRec = new ArrayAdapter<Recurs>(this,R.layout.spinner_item);
-        spinnerArrayAdapterRec.add(new Recurs("Tria el recurs.."));
+        spinnerArrayAdapterRec.add(new Recurs("Tria el recurs..."));
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
